@@ -1,4 +1,5 @@
-# ComPyNent
+<h1 style="color:blue;">ComPyNent</h1>
+
 Entity-Component-System (ECS) framework for Python 3+. It aims to be flexible, performant and easy to use and learn.
 
 ## How to use
