@@ -1,2 +1,2 @@
-# CompPyNent
-Entity-Component-System (ECS) framework for python.
+# ComPyNent
+Entity-Component-System (ECS) framework for Python 3+.
