@@ -47,27 +47,21 @@ class EntityManager(object):
         """Add a component to an entity"""
         self.entities[entity].append(component)
 
-    def get_component_of_type(entity, component_type):
+    def get_component(entity, component_type):
         """Return the component of the type component_type on
         entity entity. If it does not exist, None is returned."""
         for component in self.entities[entity]:
             if type(component) == component_type:
                 return component
 
-    def remove_component(self, entity, component):
+    def remove_component(self, entity, component_type):
         """Remove a component from an entity."""
-        try:
-            self.entities[entity].remove(component)
-        except ValueError:
-            msg = "You attempted to remove a component that does not exist!"
-            warnings.warn(msg)
+        for component in self.entities[entity]:
+            if type(component) == component_type:
+                self.entities[entity].remove(component)
+                return
 
-    def has_component(self, entity, component):
-        """Return a bool indicating if the passed entity contains
-        a component."""
-        return component in self.entities[entity]
-        
-    def has_component_of_type(self, entity, component_type):
+    def has_component(self, entity, component_type):
         """Return a bool indicating if the passed entity contains
         a component of type component_type."""
         for component in self.entities[entity]:
