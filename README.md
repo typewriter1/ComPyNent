@@ -41,3 +41,6 @@ while True:
 
 ## Contributing
 See [CONTRIBUTING.md](https://github.com/typewriter1/ComPyNent/blob/master/CONTRIBUTING.md).
+
+# License
+[The Unlicense](https://unlicense.org/)
