@@ -34,8 +34,8 @@ ecs.add_component(entity, component)
 
 def message_system():
     for entity in ecs.get_entities():
-        if entity.has_component_of_type(MessageComponent):
-            print(ecs.get_component_of_type(entity, MessageComponent)
+        if entity.has_component(MessageComponent):
+            print(ecs.get_component(entity, MessageComponent)
             
 ecs.add_system(message_system)
 
