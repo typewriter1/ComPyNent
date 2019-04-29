@@ -8,7 +8,11 @@ Entity-Component-System (ECS) framework for Python 3+. It aims to be flexible, p
 This is a one-file library: just add `compynent.py` to your project, and import it with `import compynent`.
 
 ## Overview
-For an explanation of how ECS works and what the motivation for it is, read [this article](https://www.gamedev.net/articles/programming/general-and-gameplay-programming/understanding-component-entity-systems-r3013/). The main class is the EntityManager class. Normally, you only need to instantiate it once.
+For an explanation of how ECS works and what the motivation for it is, read [this article](https://www.gamedev.net/articles/programming/general-and-gameplay-programming/understanding-component-entity-systems-r3013/).
+The implementation in ComPyNent uses the approach by which entities are simply integers that refer to a list of the components
+attached to them.
+
+The main class is the EntityManager class. Normally, you only need to instantiate it once.
 
 - To create an __entity__, use the `create_entity` method of EntityManager. It optionally accepts inital components as parameters
 - __Components__ are simply objects with data as its members
