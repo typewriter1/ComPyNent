@@ -84,6 +84,10 @@ class EntityManager(object):
         for function in self.systems:
             function(*data)
 
-    def get_entities_with_component(self, component):
+    def get_entities_with_component(self, component_type):
         """Returns a list of all entities that contain a given component."""
-        pass
+        results = []
+        for entity in self.entities:
+            if self.has_component(entity, component_type):
+                results.append(entity)
+        return results
