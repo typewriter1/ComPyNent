@@ -47,7 +47,7 @@ class EntityManager(object):
         """Add a component to an entity"""
         self.entities[entity].append(component)
 
-    def get_component(entity, component_type):
+    def get_component(self, entity, component_type):
         """Return the component of the type component_type on
         entity entity. If it does not exist, None is returned."""
         for component in self.entities[entity]:
@@ -61,13 +61,18 @@ class EntityManager(object):
                 self.entities[entity].remove(component)
                 return
 
-    def has_component(self, entity, component_type):
-        """Return a bool indicating if the passed entity contains
-        a component of type component_type."""
+    def has_component(self, entity, *component_types):
+        """
+        Return a bool indicating if the passed entity contains
+        a every one of the passed components.
+        """
+        types_present = []
         for component in self.entities[entity]:
-            if type(component) == component_type:
-                return True
-        return False
+            types_present.append(type(component))
+        for required_type in component_types:
+            if required_type not in types_present:
+                return False
+        return True
 
     def clear_entity(self, entity):
         """Removes all components from an entity."""
@@ -84,10 +89,13 @@ class EntityManager(object):
         for function in self.systems:
             function(*data)
 
-    def get_entities_with_component(self, component_type):
+    def get_entities_with_component(self, *component_types):
         """Returns a list of all entities that contain a given component."""
+        #Access the methods outside the loop for performance reasons
+        has_component = self.has_component
+        append = list.append
         results = []
         for entity in self.entities:
-            if self.has_component(entity, component_type):
-                results.append(entity)
+            if has_component(entity, *component_types):
+                append(results, entity)
         return results
