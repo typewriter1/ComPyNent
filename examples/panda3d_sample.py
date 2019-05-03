@@ -7,6 +7,9 @@ class ModelComponent:
     def __init__(self, path, parent):
         self.model = loader.load_model(path)
         self.model.reparent_to(parent)
+        
+    def cleanup(self):
+        self.model.remove_node()
           
 class PosComponent:
     def __init__(self, x=0, y=0, z=0):
