@@ -58,6 +58,11 @@ class EntityManager(object):
         """Remove a component from an entity."""
         for component in self.entities[entity]:
             if type(component) == component_type:
+                try:
+                    component.cleanup()
+                except AttributeError:
+                    #Not all components need/have a cleanup method
+                    pass
                 self.entities[entity].remove(component)
                 return
 
