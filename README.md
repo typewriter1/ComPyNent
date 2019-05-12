@@ -2,7 +2,8 @@
     ComPyNent
 </h1>
 
-Entity-Component-System (ECS) framework for Python 3+. It aims to be flexible, performant and easy to use and learn.
+Entity-Component-System (ECS) framework for Python 3+. It aims to be flexible, performant and easy to use and learn, with a specific
+emphasis on game development. There is currently an exmaple of how to integrate it with the [Panda3D](https://panda3d.org) game engine, although it can also be used in conjunction with other frameworks such as [Pygame](https://pygame.org) or [Pyglet](https://bitbucket.org/pyglet/pyglet/wiki/Home).
 
 ## How to use
 This is a one-file library: just add `compynent.py` to your project, and import it with `import compynent`.
