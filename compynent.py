@@ -72,8 +72,9 @@ class EntityManager(object):
         a every one of the passed components.
         """
         types_present = []
+        append = list.append
         for component in self.entities[entity]:
-            types_present.append(type(component))
+            append(types_present, type(component))
         for required_type in component_types:
             if required_type not in types_present:
                 return False
