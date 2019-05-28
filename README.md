@@ -43,7 +43,7 @@ ecs.add_system(message_system)
 while True:
     ecs.do_frame()
 ```
-
+__Note: adding more than one component of the same type to a single entity will cause unexpected results.__
 ## Contributing
 See [CONTRIBUTING.md](https://github.com/typewriter1/ComPyNent/blob/master/CONTRIBUTING.md).
 
