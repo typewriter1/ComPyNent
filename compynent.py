@@ -25,8 +25,9 @@ class EntityManager(object):
         Returns a integer which is a unique identifier to an
         entity.
 
-        An optional list of components can be passed to create
-        an entity with those components.
+        As optional parameters, an arbitrary number of
+        components can be passed to create an entity with those
+        components initially.
         """
         EntityManager.number += 1
         unique_id = EntityManager.number
@@ -84,16 +85,18 @@ class EntityManager(object):
         """Removes all components from an entity."""
         self.entities[entity] = []
 
-    def add_system(self, function):
-        """Creates a system from a function.
+    def add_system(self, system):
+        """Creates a system from a system object (an object with
+        an update() method.
 
         All systems are called once per frame."""
-        self.systems.append(function)
+        assert hasattr(system, "update"), "Systems must have an update method"
+        self.systems.append(system)
 
     def do_frame(self, *data):
-        """Calls all systems, optionally passing data to them."""
-        for function in self.systems:
-            function(*data)
+        """Calls update for all systems, optionally passing data to them."""
+        for system in self.systems:
+            system.update(*data)
 
     def get_entities_with_component(self, *component_types):
         """Returns a list of all entities that contain a given component."""
