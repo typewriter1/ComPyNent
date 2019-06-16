@@ -33,12 +33,13 @@ entity = ecs.create_entity()
 component = MessageComponent()
 ecs.add_component(entity, component)
 
-def message_system():
-    for entity in ecs.get_entities():
-        if entity.has_component(MessageComponent):
-            print(ecs.get_component(entity, MessageComponent)
+class MessageSystem():
+    def update(self):
+        for entity in ecs.get_entities():
+            if entity.has_component(MessageComponent):
+                print(ecs.get_component(entity, MessageComponent)
             
-ecs.add_system(message_system)
+ecs.add_system(MessageSystem())
 
 while True:
     ecs.do_frame()
