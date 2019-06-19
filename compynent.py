@@ -8,12 +8,13 @@ import warnings
 class EntityManager(object):
     """
     Manages creating entities, assigning components
-    to them and accessing the components.
+    to them, accessing the components and adding systems.
 
     An instance of this class will generally be the
     main point of interaction with this library.
     """
-
+    
+    #Record the number of entities created for their unique integer ids
     number = 0
 
     def __init__(self):
@@ -22,7 +23,7 @@ class EntityManager(object):
 
     def create_entity(self, *initial_components):
         """
-        Returns a integer which is a unique identifier to an
+        Return an integer which is a unique identifier for an
         entity.
 
         As optional parameters, an arbitrary number of
@@ -50,10 +51,11 @@ class EntityManager(object):
 
     def get_component(self, entity, component_type):
         """Return the component of the type component_type on
-        entity entity. If it does not exist, None is returned."""
+        entity. If it does not exist, None is returned."""
         for component in self.entities[entity]:
             if type(component) == component_type:
                 return component
+        return None
 
     def remove_component(self, entity, component_type):
         """Remove a component from an entity."""
@@ -70,7 +72,7 @@ class EntityManager(object):
     def has_component(self, entity, *component_types):
         """
         Return a bool indicating if the passed entity contains
-        a every one of the passed components.
+        all of the passed components.
         """
         types_present = []
         append = list.append
@@ -82,24 +84,24 @@ class EntityManager(object):
         return True
 
     def clear_entity(self, entity):
-        """Removes all components from an entity."""
+        """Remove all components from an entity."""
         self.entities[entity] = []
 
     def add_system(self, system):
-        """Creates a system from a system object (an object with
-        an update() method.
+        """Create a system from a system object (an object with
+        an update() method).
 
-        All systems are called once per frame."""
-        assert hasattr(system, "update"), "Systems must have an update method"
+        All systems are called when do_frame is called on EntityManager."""
+        assert hasattr(system, "update"), "Systems must have an update() method"
         self.systems.append(system)
 
     def do_frame(self, *data):
-        """Calls update for all systems, optionally passing data to them."""
+        """Call update for all systems, optionally passing data to them."""
         for system in self.systems:
             system.update(*data)
 
     def get_entities_with_component(self, *component_types):
-        """Returns a list of all entities that contain a given component."""
+        """Return a list of all entities that contain a given component."""
         #Access the methods outside the loop for performance reasons
         has_component = self.has_component
         append = list.append
@@ -108,3 +110,4 @@ class EntityManager(object):
             if has_component(entity, *component_types):
                 append(results, entity)
         return results
+       
