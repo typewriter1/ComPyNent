@@ -37,7 +37,7 @@ class MessageSystem():
     def update(self):
         for entity in ecs.get_entities():
             if entity.has_component(MessageComponent):
-                print(ecs.get_component(entity, MessageComponent)
+                print(ecs.get_component(entity, MessageComponent).message)
             
 ecs.add_system(MessageSystem())
 
