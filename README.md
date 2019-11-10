@@ -21,9 +21,9 @@ The main class is the EntityManager class. Normally, you only need to instantiat
 
 Example:
 ```python
-import pycomponent
+import compynent
 
-ecs = pycomponent.EntityManager()
+ecs = compynent.EntityManager()
 
 class MessageComponent:
     def __init__(self, message):
