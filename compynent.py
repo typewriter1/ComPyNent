@@ -18,8 +18,10 @@ class EntityManager(object):
     number = 0
 
     def __init__(self):
+        #Entities are id:list of components
         self.entities = {}
-        self.systems = []
+        #Systems are order:object
+        self.systems = {}
 
     def create_entity(self, *initial_components):
         """
@@ -87,18 +89,21 @@ class EntityManager(object):
         """Remove all components from an entity."""
         self.entities[entity] = []
 
-    def add_system(self, system):
+    def add_system(self, system, order=5):
         """Create a system from a system object (an object with
-        an update() method).
+        an update() method). The order parameter controls the
+        order in which the systems are called, with lower numbers
+        being run first.
 
         All systems are called when do_frame is called on EntityManager."""
         assert hasattr(system, "update"), "Systems must have an update() method"
-        self.systems.append(system)
+        assert type(order) == int, "Order must be an integer"
+        self.systems[order] = system
 
     def do_frame(self, *data):
         """Call update for all systems, optionally passing data to them."""
-        for system in self.systems:
-            system.update(*data)
+        for system in sorted(self.systems):
+            self.systems[system].update(*data)
 
     def get_entities_with_component(self, *component_types):
         """Return a list of all entities that contain a given component."""
