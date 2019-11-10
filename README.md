@@ -17,7 +17,7 @@ The main class is the EntityManager class. Normally, you only need to instantiat
 
 - To create an __entity__, use the `create_entity` method of EntityManager. It optionally accepts inital components as parameters
 - __Components__ are simply objects with data as its members
-- A __system__ can be a function or method that is added via the `add_system` method of EntityManager, and it is called each time that the `do_frame` method of that instance of EntityManager is called
+- A __system__ can be a function or method that is added via the `add_system` method of EntityManager, and it is called each time that the `do_frame` method of that instance of EntityManager is called. `add_system` has an order parameter, which is an integer that specifies the order that systems should be run in, with systems with lower order values being run first.
 
 Example:
 ```python
